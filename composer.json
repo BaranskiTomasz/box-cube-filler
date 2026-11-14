@@ -1,0 +1,38 @@
+{
+    "name": "baranskitomasz/box-cube-filler",
+    "description": "Minimum power-of-2 cubes needed to exactly fill a box, given a limited supply per size",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.3",
+        "symfony/console": "^7.4",
+        "symfony/dependency-injection": "^7.1",
+        "symfony/string": "^7.1",
+        "symfony/var-exporter": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Causeway\\BoxCubeFiller\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Causeway\\BoxCubeFiller\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tomasz Baranski",
+            "email": "tomek_baranski@wp.pl"
+        }
+    ],
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

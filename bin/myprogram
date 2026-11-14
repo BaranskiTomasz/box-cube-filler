@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Causeway\BoxCubeFiller\Command\FillBoxesCommand;
+use Causeway\BoxCubeFiller\Cube\Service\BoxCubeFiller;
+use Causeway\BoxCubeFiller\Cube\Service\BoxCubeFillerInterface;
+use Causeway\BoxCubeFiller\Input\ProblemLineParser;
+use Causeway\BoxCubeFiller\Input\ProblemLineParserInterface;
+use Symfony\Component\Console\Application;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+$container = new ContainerBuilder();
+$container->autowire(ProblemLineParser::class);
+$container->setAlias(ProblemLineParserInterface::class, ProblemLineParser::class);
+$container->autowire(BoxCubeFiller::class);
+$container->setAlias(BoxCubeFillerInterface::class, BoxCubeFiller::class);
+$container->autowire(FillBoxesCommand::class)->setPublic(true);
+$container->compile();
+
+$command = $container->get(FillBoxesCommand::class);
+
+$application = new Application('Box Cube Filler');
+$application->addCommand($command);
+$application->setDefaultCommand((string) $command->getName(), true);
+$application->run();
